@@ -1,0 +1,127 @@
+version: "3"
+services:
+        cloudera_manager:
+                privileged: true
+                hostname: manager
+                build:
+                        context: .
+                        dockerfile: Dockerfile 
+                expose:
+                        - "22"
+                        - "7180"
+                        - "7183"
+                        - "7182"
+                        - "7432"
+                        - "9000"
+                        - "9001"
+                        - "8020"
+                        - "50010"
+                networks:
+                        comon:
+                                ipv4_address: 172.29.0.2
+                                aliases:
+                                        - manager
+                tty: true
+        namenode:
+                privileged: true
+                hostname: namenode
+                 build:
+                        context: .
+                        dockerfile: Dockerfile               image: centos_ssh:0.1
+                expose:
+                        - "22"
+                        - "7180"
+                        - "7183"
+                        - "7182"
+                        - "7432"
+                        - "9000"
+                        - "9001"
+                        - "8020"
+                        - "50010"
+                networks:
+                         comon:
+                                ipv4_address: 172.29.0.3
+                                aliases:
+                                        - namenode
+                depends_on:
+                        - cloudera_manager
+                tty: true
+        datanode1:
+                privileged: true
+                hostname: datanode1
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+                expose:
+                        - "22"
+                        - "7180"
+                        - "7183"
+                        - "7182"
+                        - "7432"
+                        - "9000"
+                        - "9001"
+                        - "8020"
+                        - "50010"
+                networks:
+                        comon:
+                                ipv4_address: 172.29.0.4
+                                aliases:
+                                        - datanode1
+                depends_on:
+                        - namenode
+                tty: true
+        datanode2:
+                privileged: true
+                hostname: datanode2
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+                expose:
+                        - "22"
+                        - "7180"
+                        - "7183"
+                        - "7182"
+                        - "7432"
+                        - "9000"
+                        - "8020"
+                        - "9001"
+                        - "50010"
+                networks:
+                        comon:
+                                ipv4_address: 172.29.0.5
+                                aliases:
+                                        - datanode2
+                depends_on:
+                        - namenode
+                tty: true
+        datanode3:
+                privileged: true
+                hostname: datanode3
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+                expose:
+                        - "22"
+                        - "7180"
+                        - "7183"
+                        - "7182"
+                        - "7432"
+                        - "9000"
+                        - "9001"
+                        - "8020"
+                        - "50010"
+                networks:
+                        comon:
+                                ipv4_address: 172.29.0.6
+                                aliases:
+                                        - datanode3
+                depends_on:
+                        - namenode
+                tty: true
+networks:
+        comon:
+                driver: bridge
+                ipam:
+                        driver: default
+                        config:
+                                - subnet: 172.29.0.0/16
