@@ -4,8 +4,8 @@ services:
                 privileged: true
                 hostname: manager
                 build:
-                        context: .
-                        dockerfile: Dockerfile 
+                        context: ./
+                        dockerfile: Dockerfile
                 expose:
                         - "22"
                         - "7180"
@@ -25,9 +25,9 @@ services:
         namenode:
                 privileged: true
                 hostname: namenode
-                 build:
+                build:
                         context: .
-                        dockerfile: Dockerfile               image: centos_ssh:0.1
+                        dockerfile: Dockerfile
                 expose:
                         - "22"
                         - "7180"
