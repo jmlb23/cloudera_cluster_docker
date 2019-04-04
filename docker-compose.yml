@@ -118,6 +118,39 @@ services:
                 depends_on:
                         - namenode
                 tty: true
+        reposerver:
+                privileged: true
+                hostname: reposerver
+                build:
+                        context: .
+                        dockerfile: Dockerfile_reposerver
+                expose:
+                        - "80"
+                networks:
+                        comon:
+                                ipv4_address: 172.29.0.7
+                                aliases:
+                                        - reposerver
+                depends_on:
+                        - namenode
+                tty: true
+
+        db:
+                privileged: true
+                hostname: db
+                build:
+                        context: .
+                        dockerfile: Dockerfile_db
+                expose:
+                        - "5432"
+                networks:
+                        comon:
+                                ipv4_address: 172.29.0.8
+                                aliases:
+                                        - db
+                depends_on:
+                        - namenode
+                tty: true
 networks:
         comon:
                 driver: bridge

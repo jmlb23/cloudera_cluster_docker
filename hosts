@@ -10,4 +10,5 @@ ff02::2 ip6-allrouters
 172.29.0.4      datanode1
 172.29.0.5      datanode2
 172.29.0.6      datanode3
-
+172.29.0.7      reposerver
+172.29.0.8	db
